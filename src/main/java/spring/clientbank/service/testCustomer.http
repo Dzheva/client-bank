@@ -1,0 +1,52 @@
+### create an customer №1
+POST http://localhost:9000/customers
+Content-Type: application/json
+
+{
+    "name": "Ihor Dzheva",
+    "email": "dzheva@test.com",
+    "age": 30
+}
+
+### create an customer №2
+POST http://localhost:9000/customers
+Content-Type: application/json
+
+{
+  "name": "Vasyl Stus",
+  "email": "stus@test.com",
+  "age": 47
+}
+
+### get an customer-1
+GET http://localhost:9000/customers/1
+
+### get an customer-2
+GET http://localhost:9000/customers/2
+
+### get all customers
+GET http://localhost:9000/customers/all
+
+### delete an customer
+DELETE http://localhost:9000/customers/1
+
+### update an customer
+PUT http://localhost:9000/customers
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "Vasyl Stus",
+  "email": "vasyl-stus@test.com",
+  "age": 50
+}
+
+### create an account for the customer-1
+POST http://localhost:9000/customers/1
+
+### create an account for the customer-2
+POST http://localhost:9000/customers/2
+
+### delete the account-1 from the customer-1
+DELETE http://localhost:9000/customers/deleteAccount?customerId=1&accountId=1
+

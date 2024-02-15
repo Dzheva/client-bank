@@ -1,0 +1,40 @@
+
+### create an account №1
+POST http://localhost:9000/accounts
+Content-Type: application/json
+
+{
+  "currency": "EUR"
+}
+
+### create an account №2
+POST http://localhost:9000/accounts
+Content-Type: application/json
+
+{
+  "currency": "USD"
+}
+
+### get an account-1
+GET http://localhost:9000/accounts/1
+
+### get an account-2
+GET http://localhost:9000/accounts/2
+
+### delete an account
+DELETE http://localhost:9000/accounts/3
+
+### find the account by number
+GET http://localhost:9000/accounts/find?number=ef2765c3
+
+### add money to the account
+PUT http://localhost:9000/accounts/add-money?number=737d2a51-dba9-437e-b97c-41645b3221d0&amount=500
+
+### withdraw money from the account
+PUT http://localhost:9000/accounts/withdraw-money?number=53cd8272-f642-4a13-a2b3-2cbc4786a964&amount=500
+
+### transfer money from account-1 to account-2
+PUT http://localhost:9000/accounts/transfer-money?numberFrom=737d2a51-dba9-437e-b97c-41645b3221d0&numberTo=4ebb25d3-d5d1-439b-8752-bbc7255bb4f2&amount=250
+
+
+
