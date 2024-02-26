@@ -2,11 +2,11 @@ package spring.clientbank.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import spring.clientbank.dao.AccountDAO;
-import spring.clientbank.dao.CustomerDAO;
 import spring.clientbank.model.Account;
 import spring.clientbank.model.Currency;
 import spring.clientbank.model.Customer;
+import spring.clientbank.repository.AccountRepository;
+import spring.clientbank.repository.CustomerRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,48 +14,51 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
-    private final CustomerDAO customerDAO;
-    private final AccountDAO accountDAO;
+    private final CustomerRepository customerRepository;
+    private final AccountRepository accountRepository;
 
-    public Customer createCustomer(Customer customer){
-        return customerDAO.save(customer);
+    public Customer createCustomer(Customer customer) {
+        return customerRepository.save(customer);
     }
 
-    public Optional<Customer> getCustomer(Long id){
-        return Optional.ofNullable(customerDAO.getOne(id));
+    public Optional<Customer> getCustomer(Long id) {
+        return customerRepository.findById(id);
     }
 
-    public boolean deleteCustomer(Long id){
-        return customerDAO.deleteById(id);
+    public void deleteCustomer(Long id) {
+        customerRepository.deleteById(id);
     }
 
-    public List<Customer> getAllCustomers(){
-        return customerDAO.getAllCustomers();
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
     }
 
-    public Optional<Customer> updateCustomer(Customer updatedCustomer){
-        return Optional.ofNullable(customerDAO.updateCustomer(updatedCustomer));
+    public Customer updateCustomer(Customer updatedCustomer) {
+        return customerRepository.save(updatedCustomer);
     }
+
     public Optional<Customer> createAccountForCustomer(Long id) {
-        Customer customer = customerDAO.getOne(id);
-        if(customer != null){
+        Optional<Customer> optionalCustomer = getCustomer(id);
+
+        if (optionalCustomer.isPresent()) {
+            Customer customer = optionalCustomer.get();
             Account account = new Account(Currency.UAH, customer);
-            Account createdAccount = accountDAO.save(account);
-            customer.getAccounts().add(createdAccount);
+            customer.getAccounts().add(account);
+            return Optional.of(updateCustomer(customer));
         }
-        return updateCustomer(customer);
+        return Optional.empty();
     }
 
-    public boolean deleteAccountFromCustomer(Long customerId, Long accountId){
-        Customer customer = customerDAO.getOne(customerId);
-        if(customer != null){
-            Account accountToDelete = accountDAO.getOne(accountId);
-            if(accountToDelete != null && customer.getAccounts().contains(accountToDelete)){
-                accountDAO.delete(accountToDelete);
-                customer.getAccounts().remove(accountToDelete);
-                updateCustomer(customer);
-                return true;
-            }
+    public boolean deleteAccountFromCustomer(Long customerId, Long accountId) {
+        Optional<Customer> optionalCustomer = getCustomer(customerId);
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+
+        if (optionalCustomer.isPresent() && optionalAccount.isPresent()) {
+            Customer customer = optionalCustomer.get();
+            Account accountToDelete = optionalAccount.get();
+            accountRepository.delete(accountToDelete);
+            updateCustomer(customer);
+            return true;
         }
         return false;
     }

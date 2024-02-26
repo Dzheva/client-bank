@@ -1,19 +1,32 @@
 package spring.clientbank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Customer {
-    private Long id;
+@NoArgsConstructor
+@Entity
+public class Customer extends AbstractEntity {
+    @Column(name = "customer_name", nullable = false, length = 50)
     private String name;
+    @Column(unique = true, nullable = false, length = 50)
     private String email;
+    @Column(name = "age", nullable = false)
     private Integer age;
-
-    private List<Account> accounts = new ArrayList<>();
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Account> accounts;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "customer_employer",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "employer_id")
+    )
+    private List<Employer> employers;
 
     public Customer(String name, String email, Integer age) {
         this.name = name;

@@ -6,3 +6,36 @@ spring:
     multipart:
       max-file-size: 10MB
 
+  profiles:
+    active: local
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+  datasource:
+    local:
+      url: jdbc:h2:mem:mydb
+      username: sa
+      password: password
+      driverClassName: org.h2.Driver
+    prod:
+      url: jdbc:postgresql://abul.db.elephantsql.com:5432/wqvjbqne
+      username: wqvjbqne
+      password: z_Lw-LBjOgQzqSPwb5xrYgokViSQ4yZa
+      driverClassName: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+    script-encoding: UTF-8
+    initialization-mode: always

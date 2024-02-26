@@ -1,0 +1,27 @@
+### create the employer №1
+POST http://localhost:9000/employers
+Content-Type: application/json
+
+{
+  "name": "Deutsche Bahn №1",
+  "address": "Germany, 11111, Berlin, HauptStrasse str.11"
+}
+
+### get the employer #1
+GET http://localhost:9000/employers/1
+
+### update the employer #1
+PUT http://localhost:9000/employers
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Deutsche Bahn",
+  "address": "Germany, 22222, Berlin, HauptStrasse str.22"
+}
+
+### delete the employer #1
+DELETE http://localhost:9000/employers/1
+
+### add the employer to the customer
+POST  http://localhost:9000/employers/add-employer-to-customer?customerId=1&employerId=1

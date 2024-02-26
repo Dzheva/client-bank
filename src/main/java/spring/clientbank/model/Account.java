@@ -1,15 +1,23 @@
 package spring.clientbank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.*;
 
+import java.util.UUID;
 @Data
-public class Account {
-    private Long id;
+@NoArgsConstructor
+@Entity
+public class Account extends AbstractEntity{
+    @Column(name = "account_number", unique = true)
     private String number;
+    @Enumerated(EnumType.STRING)
     private Currency currency;
+    @Column(name = "balance")
     private Double balance = 0.0;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     @JsonIgnore
     private Customer customer;
 
