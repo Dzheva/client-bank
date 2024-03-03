@@ -17,6 +17,5 @@ public class Employer extends AbstractEntity{
     @Column(nullable = false)
     private String address;
     @ManyToMany(mappedBy = "employers", fetch = FetchType.EAGER)
-    @JsonIgnore
     private List<Customer> customers;
 }

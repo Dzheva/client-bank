@@ -3,11 +3,16 @@ package spring.clientbank.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import spring.clientbank.dto.account.AccountMapper;
+import spring.clientbank.dto.account.AccountRequest;
+import spring.clientbank.dto.account.AccountResponse;
 import spring.clientbank.model.Account;
 import spring.clientbank.service.AccountService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("accounts")
@@ -15,17 +20,21 @@ import java.util.List;
 
 public class AccountController {
     private final AccountService accountService;
+    private final AccountMapper mapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Account createAccount(@RequestBody Account account) {
-        return accountService.createAccount(account);
+    public AccountResponse createAccount(@Validated @RequestBody AccountRequest accountRequest) {
+        Account account = mapper.accountRequestToAccount(accountRequest);
+        Account createdAccount = accountService.createAccount(account);
+        AccountResponse accountResponse = mapper.accountToAccountResponse(createdAccount);
+        return accountResponse;
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Account> getAccount(@PathVariable("id") Long id) {
-
+    public ResponseEntity<AccountResponse> getAccount(@PathVariable("id") Long id) {
         return accountService.getAccountById(id)
+                .map(mapper::accountToAccountResponse)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
@@ -37,24 +46,32 @@ public class AccountController {
     }
 
     @GetMapping("find")
-    public Account findAccountByNumber(@RequestParam String number) {
-        return accountService.findByNumber(number);
+    public AccountResponse findAccountByNumber(@RequestParam String number) {
+        Account account = accountService.findByNumber(number);
+        AccountResponse accountResponse = mapper.accountToAccountResponse(account);
+        return accountResponse;
     }
 
     @PutMapping("add-money")
-    public Account addMoneyToAccount(@RequestParam String number, @RequestParam Double amount) {
-        return accountService.addMoneyToAccount(number, amount);
+    public AccountResponse addMoneyToAccount(@RequestParam String number, @RequestParam Double amount) {
+        Account account = accountService.addMoneyToAccount(number, amount);
+        AccountResponse accountResponse = mapper.accountToAccountResponse(account);
+        return accountResponse;
     }
 
     @PutMapping("withdraw-money")
-    public Account withdrawMoneyFromAccount(@RequestParam String number, @RequestParam Double amount) {
-        return accountService.withdrawMoneyFromAccount(number, amount);
+    public AccountResponse withdrawMoneyFromAccount(@RequestParam String number, @RequestParam Double amount) {
+        Account account = accountService.withdrawMoneyFromAccount(number, amount);
+        AccountResponse accountResponse = mapper.accountToAccountResponse(account);
+        return accountResponse;
     }
 
     @PutMapping("transfer-money")
-    public List<Account> transferMoney(@RequestParam String numberFrom, @RequestParam String numberTo,
-                                       @RequestParam Double amount) {
-        return accountService.transferMoney(numberFrom, numberTo, amount);
+    public List<AccountResponse> transferMoney(@RequestParam String numberFrom, @RequestParam String numberTo,
+                                               @RequestParam Double amount) {
+        return accountService.transferMoney(numberFrom, numberTo, amount).stream()
+                .map(mapper::accountToAccountResponse)
+                .collect(Collectors.toList());
     }
 
 }

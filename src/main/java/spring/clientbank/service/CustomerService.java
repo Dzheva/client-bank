@@ -1,12 +1,15 @@
 package spring.clientbank.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import spring.clientbank.model.Account;
 import spring.clientbank.model.Currency;
 import spring.clientbank.model.Customer;
 import spring.clientbank.repository.AccountRepository;
 import spring.clientbank.repository.CustomerRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +64,10 @@ public class CustomerService {
             return true;
         }
         return false;
+    }
+
+    public Page<Customer> pageGetAllCustomers(Pageable pageable ) {
+        return customerRepository.findAll(pageable);
     }
 
 }

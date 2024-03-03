@@ -14,6 +14,10 @@ import java.util.List;
 public class Customer extends AbstractEntity {
     @Column(name = "customer_name", nullable = false, length = 50)
     private String name;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "phone_number")
+    private String phoneNumber;
     @Column(unique = true, nullable = false, length = 50)
     private String email;
     @Column(name = "age", nullable = false)

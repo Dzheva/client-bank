@@ -21,6 +21,9 @@ GET http://localhost:9000/accounts/1
 ### get the account-2
 GET http://localhost:9000/accounts/2
 
+### get the account-3
+GET http://localhost:9000/accounts/3
+
 ### delete an account
 DELETE http://localhost:9000/accounts/3
 
@@ -28,13 +31,13 @@ DELETE http://localhost:9000/accounts/3
 GET http://localhost:9000/accounts/find?number=cf895fbf-fbd1-4d9a-af10-9a9f21c3cb55
 
 ### add money to the account-2
-PUT http://localhost:9000/accounts/add-money?number=cf895fbf-fbd1-4d9a-af10-9a9f21c3cb55&amount=500
+PUT http://localhost:9000/accounts/add-money?number=f09a9994-e59e-4373-a5c3-beddba98fd07&amount=500
 
 ### add money to the account-3
 PUT http://localhost:9000/accounts/add-money?number=1762da4a-e234-4fb4-9780-492288cc0d6e&amount=500
 
 ### withdraw money from the account-2
-PUT http://localhost:9000/accounts/withdraw-money?number=cf895fbf-fbd1-4d9a-af10-9a9f21c3cb55&amount=100
+PUT http://localhost:9000/accounts/withdraw-money?number=f09a9994-e59e-4373-a5c3-beddba98fd07&amount=100
 
 ### transfer money from account-2 to account-3
 PUT http://localhost:9000/accounts/transfer-money?numberFrom=cf895fbf-fbd1-4d9a-af10-9a9f21c3cb55&numberTo=1762da4a-e234-4fb4-9780-492288cc0d6e&amount=50

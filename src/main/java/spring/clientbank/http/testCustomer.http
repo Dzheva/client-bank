@@ -9,12 +9,14 @@ Content-Type: application/json
     "age": 30
 }
 
-### create the customer №2
+### create the customer №3
 POST http://localhost:9000/customers
 Content-Type: application/json
 
 {
   "name": "Vasyl Stus",
+  "password": "Strong222222",
+  "phoneNumber": "+380631074477",
   "email": "stus@test.com",
   "age": 47
 }
@@ -24,6 +26,9 @@ GET http://localhost:9000/customers/1
 
 ### get the customer-2
 GET http://localhost:9000/customers/2
+
+### get the customer-3
+GET http://localhost:9000/customers/3
 
 ### get all customers
 GET http://localhost:9000/customers/all
@@ -36,10 +41,10 @@ PUT http://localhost:9000/customers
 Content-Type: application/json
 
 {
-  "id": 1,
+  "id": 3,
   "name": "Ihor Dzheva",
   "email": "dzheva@test.com",
-  "age": 28
+  "age": 25
 }
 
 ### create an account for the customer-1
@@ -48,9 +53,15 @@ POST http://localhost:9000/customers/1
 ### create an account for the customer-2
 POST http://localhost:9000/customers/2
 
+### create an account for the customer-3
+POST http://localhost:9000/customers/3
+
 ### delete the account-1 from the customer-1
 DELETE http://localhost:9000/customers/deleteAccount?customerId=1&accountId=1
 
 ### delete the account-2 from the customer-2
 DELETE http://localhost:9000/customers/deleteAccount?customerId=2&accountId=2
+
+### get page-all-customers(pagination)
+GET http://localhost:9000/customers/page-all-customers
 

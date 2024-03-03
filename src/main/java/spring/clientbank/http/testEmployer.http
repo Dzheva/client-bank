@@ -24,4 +24,4 @@ Content-Type: application/json
 DELETE http://localhost:9000/employers/1
 
 ### add the employer to the customer
-POST  http://localhost:9000/employers/add-employer-to-customer?customerId=1&employerId=1
+POST  http://localhost:9000/employers/add-employer-to-customer?customerId=3&employerId=1

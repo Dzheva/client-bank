@@ -18,7 +18,6 @@ public class Account extends AbstractEntity{
     private Double balance = 0.0;
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
     private Customer customer;
 
     public Account(Currency currency, Customer customer) {
