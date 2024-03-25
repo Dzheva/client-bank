@@ -1,4 +1,4 @@
-package spring.clientbank.controller;
+package spring.clientbank.controller.rest;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;

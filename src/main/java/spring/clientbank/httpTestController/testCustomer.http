@@ -15,9 +15,10 @@ Content-Type: application/json
 
 {
   "name": "Vasyl Stus",
-  "password": "Strong222222",
+  "password": "Vasyl2222",
   "phoneNumber": "+380631074477",
   "email": "stus@test.com",
+  "role": "USER",
   "age": 47
 }
 
@@ -32,6 +33,7 @@ GET http://localhost:9000/customers/3
 
 ### get all customers
 GET http://localhost:9000/customers/all
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzExMzcwNzM5LCJleHAiOjE3MTE0NTcxMzl9.MVW7-rQeEr2RGyZTXqqZ2Lr9xkmRxYm3qGmTzIMdkORkDmmGlxnR0LKUbK7AyLXDgm30KVLO3I64RK5MnJyA1A
 
 ### delete an customer
 DELETE http://localhost:9000/customers/1

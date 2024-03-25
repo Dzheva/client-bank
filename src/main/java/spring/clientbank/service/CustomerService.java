@@ -1,7 +1,6 @@
 package spring.clientbank.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import spring.clientbank.model.Account;
 import spring.clientbank.model.Currency;
@@ -26,6 +25,10 @@ public class CustomerService {
 
     public Optional<Customer> getCustomer(Long id) {
         return customerRepository.findById(id);
+    }
+
+    public Optional<Customer> getCustomerByEmail(String email){
+        return customerRepository.findCustomerByEmail(email);
     }
 
     public void deleteCustomer(Long id) {

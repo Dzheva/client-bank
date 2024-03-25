@@ -1,0 +1,12 @@
+POST localhost:9000/auth/api/login
+Content-Type: application/json
+
+{
+  "username": "user1@example.com",
+  "password": "User1Test",
+  "rememberMe": false
+}
+
+### get all customers
+GET http://localhost:9000/customers/all
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzExMzcwNzM5LCJleHAiOjE3MTE0NTcxMzl9.MVW7-rQeEr2RGyZTXqqZ2Lr9xkmRxYm3qGmTzIMdkORkDmmGlxnR0LKUbK7AyLXDgm30KVLO3I64RK5MnJyA1A

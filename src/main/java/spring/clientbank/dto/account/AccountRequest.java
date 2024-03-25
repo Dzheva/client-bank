@@ -1,7 +1,7 @@
 package spring.clientbank.dto.account;
 
-import jakarta.validation.constraints.NegativeOrZero;
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NegativeOrZero;
+import javax.validation.constraints.NotBlank;
 import lombok.Value;
 
 @Value

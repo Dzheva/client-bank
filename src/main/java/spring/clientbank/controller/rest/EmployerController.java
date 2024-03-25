@@ -1,4 +1,4 @@
-package spring.clientbank.controller;
+package spring.clientbank.controller.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class EmployerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployerResponse createEmployer(@Validated  @RequestBody EmployerRequest employerRequest) {
+    public EmployerResponse createEmployer(@Validated @RequestBody EmployerRequest employerRequest) {
         Employer employer = mapper.employerRequestToEmployer(employerRequest);
         Employer createdEmployer = employerService.createEmployer(employer);
         EmployerResponse employerResponse = mapper.employerToEmployerResponse(createdEmployer);
@@ -52,7 +52,7 @@ public class EmployerController {
 
     @PostMapping("add-employer-to-customer")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<EmployerResponse> addEmployerToCustomer(@RequestParam Long customerId, @RequestParam Long employerId){
+    public ResponseEntity<EmployerResponse> addEmployerToCustomer(@RequestParam Long customerId, @RequestParam Long employerId) {
         return employerService.addEmployerToCustomer(customerId, employerId)
                 .map(mapper::employerToEmployerResponse)
                 .map(ResponseEntity::ok)

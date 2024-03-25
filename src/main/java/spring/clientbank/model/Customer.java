@@ -1,10 +1,11 @@
 package spring.clientbank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class Customer extends AbstractEntity {
     private String phoneNumber;
     @Column(unique = true, nullable = false, length = 50)
     private String email;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @Column(name = "age", nullable = false)
     private Integer age;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
@@ -31,6 +34,7 @@ public class Customer extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "employer_id")
     )
     private List<Employer> employers;
+
 
     public Customer(String name, String email, Integer age) {
         this.name = name;

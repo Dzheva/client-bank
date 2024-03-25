@@ -9,4 +9,18 @@ spring:
   profiles:
     active: local
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 352098770252-qm0fg5k6gb453mgmam4q5oj1nmcnkf62.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: http://localhost:9000/login/oauth2/code/google
+            scope: openid,email,profile
 
+logging:
+    level:
+      org:
+        springframework:
+          security: DEBUG

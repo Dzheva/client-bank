@@ -1,4 +1,4 @@
-package spring.clientbank.controller;
+package spring.clientbank.controller.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
